@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import ItemAdd from './components/ItemAdd';
+import ItemList from './components/ItemList';
+import NavigationBar from './components/NavigationBar';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch
+} from "react-router-dom";
 
 function App() {
+  const [listItems, setListItems] = useState([]);
+  const [itemText, setItemText] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Route exact path="/">
+            <ItemList listItems={listItems} setListItems={setListItems} />
+            <ItemAdd listItems={listItems} setListItems={setListItems} itemText={itemText} setItemText={setItemText} />
+          </Route>
+          <NavigationBar />
+        </header>
+      </div>
+    </Router>
   );
 }
 
