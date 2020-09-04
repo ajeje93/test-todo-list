@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -12,13 +12,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function ItemAdd({ listItems, setListItems, itemText, setItemText }) {
+function ItemAdd({ listItems, setListItems }) {
+    const [itemText, setItemText] = useState("");
+
     const classes = useStyles();
 
     const handleAddItem = (itemText, setItemText, listItems, setListItems) => {
         const nextItem = {
             id: nanoid(),
-            text: itemText
+            text: itemText,
+            done: false
         }
 
         const nextListItems = [...listItems, nextItem];

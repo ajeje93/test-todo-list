@@ -1,30 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import ItemAdd from './components/ItemAdd';
 import ItemList from './components/ItemList';
 import NavigationBar from './components/NavigationBar';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch
+  Route
 } from "react-router-dom";
+import RandomFact from './components/RandomFact';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    marginTop: 50
+  },
+}));
 
 function App() {
-  const [listItems, setListItems] = useState([]);
-  const [itemText, setItemText] = useState("");
+  const classes = useStyles();
 
   return (
     <Router>
-      <div className="App">
-        <header className="App-header">
-          <Route exact path="/">
-            <ItemList listItems={listItems} setListItems={setListItems} />
-            <ItemAdd listItems={listItems} setListItems={setListItems} itemText={itemText} setItemText={setItemText} />
+      <div className={classes.root}>
+        <Switch>
+          <Route path="/:type?">
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <Grid item xs>
+                <RandomFact />
+              </Grid>
+              <Grid item xs>
+                <ItemList />
+              </Grid>
+            </Grid>
           </Route>
-          <NavigationBar />
-        </header>
+        </Switch>
+        <NavigationBar />
       </div>
     </Router>
   );

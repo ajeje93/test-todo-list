@@ -5,13 +5,7 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import ListIcon from '@material-ui/icons/List';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useRouteMatch
-} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -28,7 +22,7 @@ export default function SimpleBottomNavigation() {
     return (
         <BottomNavigation
             value={value}
-            onChange={(event, newValue) => {
+            onChange={(newValue) => {
                 setValue(newValue);
             }}
             showLabels
